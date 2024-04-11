@@ -10,5 +10,7 @@ namespace pr20
     internal class Data
     {
         public static Zakazy? zakazy;
+        public static Client? client;
+        public static Catalog? catalog;
     }
 }

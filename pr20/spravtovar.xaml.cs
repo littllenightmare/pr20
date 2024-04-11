@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using pr20.database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +19,31 @@ namespace pr20
     /// <summary>
     /// Логика взаимодействия для spravka.xaml
     /// </summary>
-    public partial class spravka : Window
+    public partial class spravtovar : Window
     {
-        public spravka()
+        public spravtovar()
         {
             InitializeComponent();
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadDBInListBox();
+        }
+        void LoadDBInListBox()
+        {
+            using (Pr20Context _lb = new Pr20Context())
+            {
+                int selectedIndex = ListTovar.SelectedIndex;
+                _lb.Catalogs.Load();
+                ListTovar.ItemsSource = _lb.Catalogs.Name;
+                if(selectedIndex != -1)
+                {
+                    if (selectedIndex == ListTovar.Items.Count) selectedIndex--;
+                    ListTovar.SelectedIndex = selectedIndex;
+                    ListTovar.ScrollIntoView(ListTovar.SelectedItem);
+                }
+            }
         }
     }
 }

@@ -39,29 +39,29 @@ namespace pr20
             //if (cbfabrica.Text != "Плюшевая фабрика" && cbfabrica.Text != "Бумажный Человек" && cbfabrica.Text != "Кукольный завод" && cbfabrica.Text != "ПластиДом"
             //    && cbfabrica.Text != "СлаймТаун" && cbfabrica.Text != "Воздух" && cbfabrica.Text != "Лего") errors.AppendLine("Выберите город");
 
-            if (errors.Length > 0)
-            {
-                MessageBox.Show(errors.ToString());
-                return;
-            }
-            try
-            {
-                if (Data.zakazy == null)
-                {
-                    _db.Zakazies.Add(_zakazy);
-                    _db.SaveChanges();
-                }
-                else
-                {
-                    _db.SaveChanges();
-                }
-                MessageBox.Show("Информация сохранена");
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
+            //if (errors.Length > 0)
+            //{
+            //    MessageBox.Show(errors.ToString());
+            //    return;
+            //}
+            //try
+            //{
+            //    if (Data.zakazy == null)
+            //    {
+            //        _db.Zakazies.Add(_zakazy);
+            //        _db.SaveChanges();
+            //    }
+            //    else
+            //    {
+            //        _db.SaveChanges();
+            //    }
+            //    MessageBox.Show("Информация сохранена");
+            //    this.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message.ToString());
+            //}
         }
 
         private void CancelClick(object sender, RoutedEventArgs e)

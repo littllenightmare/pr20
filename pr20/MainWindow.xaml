@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pr20"
         mc:Ignorable="d"
-        Title="20pr" Height="450" Loaded="WindowLoaded" Width="650">
+        Title="20pr" Height="450" Loaded="WindowLoaded" Width="550">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,7 +18,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="dg" HorizontalAlignment="Center" Height="170" Grid.ColumnSpan="3" Grid.Row="2"  VerticalAlignment="Center" Width="515">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="dg" HorizontalAlignment="Center" Height="170" Grid.ColumnSpan="3" Grid.Row="2"  VerticalAlignment="Center" Width="455">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Номер заказа">
                     <DataGridTemplateColumn.CellTemplate>
@@ -33,7 +33,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Address}"></TextBlock>
+                                <TextBlock Text="{Binding clientNavigation.Address}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -42,7 +42,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Phone}"></TextBlock>
+                                <TextBlock Text="{Binding Client.Phone}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -51,7 +51,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="{Binding Client.Name}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -65,27 +65,21 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Сумма заказа">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel></StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnadd" Content="Добавить запись" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="140" Grid.Row="1" Click="AddClick"/>
-        <Button x:Name="btnch" Content="Изменить запись" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="140" Grid.Column="2" Grid.Row="1" Click="ReClick"/>
-        <Button x:Name="btndel" Content="Удалить запись" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="140" Grid.Column="2" Grid.Row="3" Click="DelClick"/>
-        <Button x:Name="seebtn" Content="Просмотр записи" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="140" Grid.Column="0" Grid.Row="3" Click="SeeClick"/>
-        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="790">
-            <MenuItem Header="Добавить" Click="AddClick"></MenuItem>
-            <MenuItem Header="Изменить" Click="ReClick"></MenuItem>
-            <MenuItem Header="Просмотр" Click="SeeClick"></MenuItem>
-            <MenuItem Header="Удалить" Click="DelClick"></MenuItem>
-           <MenuItem Header="О программе" Click="InfoClick"></MenuItem>
+        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="550">
+            <MenuItem Header="Поиск" Click="FindClick"></MenuItem>
+            <MenuItem Header="Справочник клиентов" Click="spravClientClick"></MenuItem>
+            <MenuItem Header="Справочник товаров" Click="spravObjClick"></MenuItem>
+            <MenuItem Header="О программе" Click="InfoClick"></MenuItem>
             <MenuItem Header="Выход" Click="ExitClick"></MenuItem>
         </Menu>
-        <Button Grid.Column="1" Content="Поиск" HorizontalAlignment="Left" Height="45" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="180"/>
+        <Button Content="Поиск" HorizontalAlignment="Center" Height="35" Click="FindClick" Grid.Row="1" Grid.Column="2" VerticalAlignment="Bottom" Width="140"/>
+        <TextBox x:Name="findtb" HorizontalAlignment="Center" Height="35" Grid.Row="1" TextWrapping="Wrap" Grid.Column="2" Text="" VerticalAlignment="Top" Width="140"/>
+        <Button Content="Справочник Клиентов" HorizontalAlignment="Center" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="140" Click="spravClientClick"/>
+        <Button Content="Справочник Товаров" HorizontalAlignment="Center" Grid.Column="1" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="140" Click="spravObjClick"/>
+        <RadioButton x:Name="rb1" Grid.Column="2" Content="1" HorizontalAlignment="Left" Height="17" Grid.Row="1" VerticalAlignment="Center" Width="36"/>
+        <RadioButton x:Name="rb2" Grid.Column="2" Content="2" HorizontalAlignment="Center" Height="17" Grid.Row="1" VerticalAlignment="Center" Width="36"/>
+        <RadioButton x:Name="rb3" Grid.Column="2" Content="3" HorizontalAlignment="Right" Height="17" Grid.Row="1" VerticalAlignment="Center" Width="36"/>
     </Grid>
 </Window>

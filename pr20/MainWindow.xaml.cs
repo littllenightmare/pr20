@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using pr20.database;
 
 namespace pr20
@@ -20,57 +22,6 @@ namespace pr20
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void AddClick(object sender, RoutedEventArgs e)
-        {
-            Data.zakazy = null;
-            addred ar = new addred();
-            ar.Owner = this;
-            ar.ShowDialog();
-            LoadDBInDataGrid();
-        }
-
-        private void ReClick(object sender, RoutedEventArgs e)
-        {
-            if (dg.SelectedItems != null)
-            {
-                Data.zakazy = (Zakazy)dg.SelectedItem;
-                addred ar = new addred();
-                ar.Owner = this;
-                ar.WindowAddEdit.Title = "Редактирование записи";
-                ar.btnadded.Content = "Редактировать";
-                ar.ShowDialog();
-                LoadDBInDataGrid();
-            }
-        }
-
-        private void DelClick(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result;
-            result = MessageBox.Show("Удалить запись?", "Удаление записи", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    Zakazy row = (Zakazy)dg.SelectedItem;
-                    if (row != null)
-                    {
-                        using (Pr20Context _db = new Pr20Context())
-                        {
-                            _db.Zakazies.Remove(row);
-                            _db.SaveChanges();
-                        }
-
-                        LoadDBInDataGrid();
-                    }
-                }
-
-                catch
-                {
-                    MessageBox.Show("Ошибка удаления");
-                }
-            }
-            else dg.Focus();
         }
 
         private void InfoClick(object sender, RoutedEventArgs e)
@@ -89,6 +40,8 @@ namespace pr20
             {
                 int SelectedIndex = dg.SelectedIndex;
                 _db.Zakazies.Load();
+                _db.Catalogs.Load();
+                _db.Clients.Load();
                 dg.ItemsSource = _db.Zakazies.ToList();
                 if (SelectedIndex != -1)
                 {
@@ -103,25 +56,78 @@ namespace pr20
         {
             LoadDBInDataGrid();
         }
-
-        private void SeeClick(object sender, RoutedEventArgs e)
+        private void FindClick(object sender, RoutedEventArgs e)
         {
-            if (dg.SelectedItems != null)
+            if (findtb.Text.IsNullOrEmpty() == false)
             {
-                Data.zakazy = (Zakazy)dg.SelectedItem;
-                addred ar = new addred();
-                ar.Owner = this;
-                ar..IsEnabled = false;
-                ar..IsEnabled = false;
-                ar..IsEnabled = false;
-                ar..IsEnabled = false;
-                ar..IsEnabled = false;
-                ar..IsEnabled = false;
-                ar.WindowAddEdit.Title = "Просмотр записи";
-                ar.btnadded.IsEnabled = false;
-                ar.ShowDialog();
-                LoadDBInDataGrid();
+                if (rb1.IsChecked == true)
+                {
+                    MessageBox.Show("Будут найдены записи из таблицы клиенты");
+                    List<Client> listItem = (List<Client>)dg.ItemsSource;
+                    var finded = (listItem.Where(p => p.Name.Contains(findtb.Text) ||
+                        p.City.Contains(findtb.Text) ||
+                        p.Address.Contains(findtb.Text) ||
+                    p.CodeClient.ToString().Contains(findtb.Text) ||
+                    p.Phone.ToString().Contains(findtb.Text)));
+                    if (finded.Count() > 0)
+                    {
+                        Client item = finded.First();
+                        dg.SelectedItem = item;
+                        dg.ScrollIntoView(item);
+                        dg.Focus();
+                    }
+                }
+                else if (rb2.IsChecked == true)
+                {
+                    MessageBox.Show("Будут найдены записи из таблицы заказы");
+                    List<Zakazy> listItem = (List<Zakazy>)dg.ItemsSource;
+                    var finded = (listItem.Where(p => p.NumZak.ToString().Contains(findtb.Text) ||
+                        p.DateZak.ToString().Contains(findtb.Text) ||
+                        p.CodeClient.ToString().Contains(findtb.Text) ||
+                    p.CodeObj.ToString().Contains(findtb.Text) ||
+                    p.Amount.ToString().Contains(findtb.Text)));
+                    if (finded.Count() > 0)
+                    {
+                        Zakazy item = finded.First();
+                        dg.SelectedItem = item;
+                        dg.ScrollIntoView(item);
+                        dg.Focus();
+                    }
+                }
+                if (rb1.IsChecked == true)
+                {
+                    MessageBox.Show("Будут найдены записи из таблицы каталог");
+                    List<Catalog> listItem = (List<Catalog>)dg.ItemsSource;
+                    var finded = (listItem.Where(p => p.Name.Contains(findtb.Text) ||
+                        p.CodeObj.ToString().Contains(findtb.Text) ||
+                        p.Price.ToString().Contains(findtb.Text)));
+                    if (finded.Count() > 0)
+                    {
+                        Catalog item = finded.First();
+                        dg.SelectedItem = item;
+                        dg.ScrollIntoView(item);
+                        dg.Focus();
+                    }
+                }
             }
+        }
+
+        private void spravClientClick(object sender, RoutedEventArgs e)
+        {
+            Data.client = null;
+            spravbyers f = new spravbyers();
+            f.Owner = this;
+            f.ShowDialog();
+            LoadDBInDataGrid();
+        }
+
+        private void spravObjClick(object sender, RoutedEventArgs e)
+        {
+            Data.catalog = null;
+            spravtovar f = new spravtovar();
+            f.Owner = this;
+            f.ShowDialog();
+            LoadDBInDataGrid();
         }
     }
 }
