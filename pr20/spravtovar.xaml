@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="spravtovar" Loaded="WindowLoaded" Height="450" Width="300">
     <Grid>
-        <DataGrid HorizontalAlignment="Center" Height="434" VerticalAlignment="Center" Width="299"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="ListTovar" HorizontalAlignment="Center" Height="434" Grid.Row="0"  ItemsSource="{Binding CodeObjNavigation.CodeObj}" VerticalAlignment="Center" Width="300"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Grid.Row="1" Height="45" VerticalAlignment="Center" Width="100"/>
+        <Button Content="Удалить" HorizontalAlignment="Right" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="100"/>
     </Grid>
 </Window>

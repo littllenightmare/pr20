@@ -18,7 +18,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="dg" HorizontalAlignment="Center" Height="170" Grid.ColumnSpan="3" Grid.Row="2"  VerticalAlignment="Center" Width="455">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="dg" HorizontalAlignment="Center" Height="173" Grid.ColumnSpan="3" Grid.Row="2"  VerticalAlignment="Center" Width="490">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Номер заказа">
                     <DataGridTemplateColumn.CellTemplate>
@@ -33,7 +33,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding clientNavigation.Address}"></TextBlock>
+                                <TextBlock Text="{Binding CodeClientNavigation.Address}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -42,21 +42,21 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Client.Phone}"></TextBlock>
+                                <TextBlock Text="{Binding CodeClientNavigation.Phone}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Товары">
+                <DataGridTemplateColumn Header="Товары" Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Client.Name}"></TextBlock>
+                                <TextBlock Text="{Binding CodeClientNavigation.Name}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Количество">
+                <DataGridTemplateColumn Header="Количество" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -67,7 +67,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="550">
+        <Menu Grid.ColumnSpan="3" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="540">
             <MenuItem Header="Поиск" Click="FindClick"></MenuItem>
             <MenuItem Header="Справочник клиентов" Click="spravClientClick"></MenuItem>
             <MenuItem Header="Справочник товаров" Click="spravObjClick"></MenuItem>

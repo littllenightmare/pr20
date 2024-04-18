@@ -21,38 +21,23 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="btnadded" Content="Добавить" HorizontalAlignment="Center" Height="40" Grid.Column="0"  Grid.Row="6" VerticalAlignment="Center" Width="150" Click="AddEditClick"/>
         <Button Grid.Column="2" Grid.Row="6"  Content="Отмена" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150" Click="CancelClick"/>
-        <Label Grid.Column="0" Grid.Row="0" Content="Название" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150"/>
-        <Label Grid.Column="1" Grid.Row="0" Content="Цена" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150"/>
-        <Label Grid.Column="2" Grid.Row="0" Content="Количество" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150"/>
-        <Label Content="Возрастные ограничения" HorizontalAlignment="Center" Height="40" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Width="150"/>
-        <Label Grid.Column="1" Content="Фабрика изготовления" HorizontalAlignment="Center" Height="40" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
-        <Label Grid.Column="2" Content="Город-изготовитель" HorizontalAlignment="Center" Height="40" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbtoy" Text="{Binding Toy}" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
-        <TextBox x:Name="tbcost" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Cost}" VerticalAlignment="Center" Width="150"/>
-        <TextBox x:Name="tbkolvo" Grid.Column="2" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Kolvo}" VerticalAlignment="Center" Width="150"/>
-        <ComboBox x:Name="cbage" Text="{Binding Path=Age}" HorizontalAlignment="Center" Height="40" Grid.Row="3" VerticalAlignment="Center" Width="150">
-            <ComboBoxItem Content="0"></ComboBoxItem>
-            <ComboBoxItem Content="3"></ComboBoxItem>
-            <ComboBoxItem Content="6"></ComboBoxItem>
-            <ComboBoxItem Content="12"></ComboBoxItem>
-            <ComboBoxItem Content="16"></ComboBoxItem>
-        </ComboBox>
-        <ComboBox x:Name="cbfabrica" Text="{Binding Path=Fabrica}" HorizontalAlignment="Center" Height="40" Grid.Row="3" VerticalAlignment="Center" Width="150" Grid.Column="1">
-            <ComboBoxItem Content="Плюшевая фабрика"></ComboBoxItem>
-            <ComboBoxItem Content="Бумажный Человек"></ComboBoxItem>
-            <ComboBoxItem Content="Кукольный завод"></ComboBoxItem>
-            <ComboBoxItem Content="ПластиДом"></ComboBoxItem>
-            <ComboBoxItem Content="СлаймТаун"></ComboBoxItem>
-            <ComboBoxItem Content="Воздух"></ComboBoxItem>
-            <ComboBoxItem Content="Лего"></ComboBoxItem>
-        </ComboBox>
-        <ComboBox x:Name="cbcity" Text="{Binding Path=City}" Grid.Column="2" HorizontalAlignment="Center" Height="40" Grid.Row="3" VerticalAlignment="Center" Width="150">
-            <ComboBoxItem Content="Волгоград"></ComboBoxItem>
-            <ComboBoxItem Content="Коломна"></ComboBoxItem>
-            <ComboBoxItem Content="Москва"></ComboBoxItem>
-            <ComboBoxItem Content="Нижний Новгород"></ComboBoxItem>
-            <ComboBoxItem Content="Егорьевск"></ComboBoxItem>
+        <Label Grid.Column="0" Grid.Row="0" Content="Код клиента" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150"/>
+        <Label Grid.Column="1" Grid.Row="0" Content="Имя" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150"/>
+        <Label Grid.Column="2" Grid.Row="0" Content="Телефон" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="150"/>
+        <Label Content="Адрес" HorizontalAlignment="Center" Height="40" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Width="150"/>
+        <Label Grid.Column="1" Content="Город" HorizontalAlignment="Center" Height="40" Grid.Row="2" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbcode" Text="{Binding CodeClientNavigation.CodeClient}" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
+        <TextBox x:Name="tbname" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="{Binding CodeClientNavigation.Name}" VerticalAlignment="Center" Width="150"/>
+        <TextBox x:Name="tbphone" Grid.Column="2" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="{Binding CodeClientNavigation.Phone}" VerticalAlignment="Center" Width="150"/>
+        <ComboBox x:Name="cbcity" Text="{Binding CodeClientNavigation.City}" HorizontalAlignment="Center" Height="40" Grid.Row="3" VerticalAlignment="Center" Width="150" Grid.Column="1">
             <ComboBoxItem Content="Рязань"></ComboBoxItem>
+            <ComboBoxItem Content="Москва"></ComboBoxItem>
+            <ComboBoxItem Content="Коломна"></ComboBoxItem>
+            <ComboBoxItem Content="Нижний Новгород"></ComboBoxItem>
+            <ComboBoxItem Content="Орск"></ComboBoxItem>
+            <ComboBoxItem Content="Грозный"></ComboBoxItem>
+            <ComboBoxItem Content="Зарайск"></ComboBoxItem>
         </ComboBox>
+        <TextBox x:Name="tbadress" Text="{Binding CodeClientNavigation.Address}" HorizontalAlignment="Center" Height="40" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="150" IsEnabled="False"/>
     </Grid>
 </Window>

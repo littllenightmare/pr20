@@ -75,7 +75,6 @@ namespace pr20
             {
                 WindowAddEdit.Title = "Добавление записи";
                 btnadded.Content = "Добавить";
-                tbtoy.IsEnabled = true;
                 _zakazy = new Zakazy();
             }
             else

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using pr20.database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,25 @@ namespace pr20
         public spravbyers()
         {
             InitializeComponent();
+        }
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadDBInListBox();
+        }
+        void LoadDBInListBox()
+        {
+            using (Pr20Context _lb = new Pr20Context())
+            {
+                int selectedIndex = ListByer.SelectedIndex;
+                _lb.Clients.Load();
+                //ListByer.ItemsSource = _lb.Clients.Surname;
+                if (selectedIndex != -1)
+                {
+                    if (selectedIndex == ListByer.Items.Count) selectedIndex--;
+                    ListByer.SelectedIndex = selectedIndex;
+                    ListByer.ScrollIntoView(ListByer.SelectedItem);
+                }
+            }
         }
     }
 }

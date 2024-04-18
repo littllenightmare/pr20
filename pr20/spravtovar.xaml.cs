@@ -36,8 +36,8 @@ namespace pr20
             {
                 int selectedIndex = ListTovar.SelectedIndex;
                 _lb.Catalogs.Load();
-                ListTovar.ItemsSource = _lb.Catalogs.Name;
-                if(selectedIndex != -1)
+                //ListTovar.ItemsSource = _lb.Catalog.Name;
+                if (selectedIndex != -1)
                 {
                     if (selectedIndex == ListTovar.Items.Count) selectedIndex--;
                     ListTovar.SelectedIndex = selectedIndex;
