@@ -27,22 +27,59 @@ namespace pr20
         }
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            LoadDBInListBox();
+            LoadDBInDataGrid();
         }
-        void LoadDBInListBox()
+        void LoadDBInDataGrid()
         {
-            using (Pr20Context _lb = new Pr20Context())
+            using (Pr20Context _dg = new Pr20Context())
             {
-                int selectedIndex = ListByer.SelectedIndex;
-                _lb.Clients.Load();
-                //ListByer.ItemsSource = _lb.Clients.Surname;
+                int selectedIndex = databyer.SelectedIndex;
+                _dg.Clients.Load();
+                databyer.ItemsSource = _dg.Clients.ToList();
                 if (selectedIndex != -1)
                 {
-                    if (selectedIndex == ListByer.Items.Count) selectedIndex--;
-                    ListByer.SelectedIndex = selectedIndex;
-                    ListByer.ScrollIntoView(ListByer.SelectedItem);
+                    if (selectedIndex == databyer.Items.Count) selectedIndex--;
+                    databyer.SelectedIndex = selectedIndex;
+                    databyer.ScrollIntoView(databyer.SelectedItem);
                 }
             }
+        }
+        private void addclick(object sender, RoutedEventArgs e)
+        {
+            Data.client = null;
+            addbyer ab = new addbyer();
+            ab.Owner = this;
+            ab.ShowDialog();
+            LoadDBInDataGrid();
+        }
+
+        private void delClick(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result;
+            result = MessageBox.Show("Удалить запись?", "Удаление записи", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Client row = (Client)databyer.SelectedItem;
+                    if (row != null)
+                    {
+                        using (Pr20Context _dg = new Pr20Context())
+                        {
+                            _dg.Clients.Remove(row);
+                            _dg.SaveChanges();
+                        }
+
+                        LoadDBInDataGrid();
+                    }
+                }
+
+                catch
+                {
+                    MessageBox.Show("Ошибка удаления");
+                }
+            }
+            else databyer.Focus();
         }
     }
 }

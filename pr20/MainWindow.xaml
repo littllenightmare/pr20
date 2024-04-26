@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pr20"
         mc:Ignorable="d"
-        Title="20pr" Height="450" Loaded="WindowLoaded" Width="550">
+        Title="20pr" Height="450" Loaded="WindowLoaded" Width="550" ResizeMode="NoResize" Icon="/116.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -51,7 +51,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding CodeClientNavigation.Name}"></TextBlock>
+                                <TextBlock Text="{Binding CodeObjNavigation.Name}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -78,8 +78,6 @@
         <TextBox x:Name="findtb" HorizontalAlignment="Center" Height="35" Grid.Row="1" TextWrapping="Wrap" Grid.Column="2" Text="" VerticalAlignment="Top" Width="140"/>
         <Button Content="Справочник Клиентов" HorizontalAlignment="Center" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="140" Click="spravClientClick"/>
         <Button Content="Справочник Товаров" HorizontalAlignment="Center" Grid.Column="1" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="140" Click="spravObjClick"/>
-        <RadioButton x:Name="rb1" Grid.Column="2" Content="1" HorizontalAlignment="Left" Height="17" Grid.Row="1" VerticalAlignment="Center" Width="36"/>
-        <RadioButton x:Name="rb2" Grid.Column="2" Content="2" HorizontalAlignment="Center" Height="17" Grid.Row="1" VerticalAlignment="Center" Width="36"/>
-        <RadioButton x:Name="rb3" Grid.Column="2" Content="3" HorizontalAlignment="Right" Height="17" Grid.Row="1" VerticalAlignment="Center" Width="36"/>
+        <Button Content="К запросам" HorizontalAlignment="Center" Grid.Column="1" Height="45" Grid.Row="3" VerticalAlignment="Center" Width="140" Click="zaprosiClick"/>
     </Grid>
 </Window>

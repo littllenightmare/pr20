@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,45 +19,44 @@ namespace pr20
     /// <summary>
     /// Логика взаимодействия для addred.xaml
     /// </summary>
-    public partial class addred : Window
+    public partial class addbyer : Window
     {
         Pr20Context _db = new Pr20Context();
-        Zakazy _zakazy;
-        public addred()
+        Client _client;
+        public addbyer()
         {
             InitializeComponent();
         }
 
         private void AddEditClick(object sender, RoutedEventArgs e)
         {
-            //StringBuilder errors = new StringBuilder();
-            //if (tbtoy.Text.Length == 0) errors.AppendLine("Введите название");
-            //if (Int32.TryParse(tbcost.Text, out int a) == false || a <= 0) errors.AppendLine("Введите корректную стоимость");
-            //if (Int32.TryParse(tbkolvo.Text, out a) == false || a <= 0) errors.AppendLine("Введите корректное количество");
-            //if (cbage.Text != "0" && cbage.Text != "3" && cbage.Text != "6" && cbage.Text != "12" && cbage.Text != "16") errors.AppendLine("Выберите возрастные ограничения");
-            //if (cbcity.Text != "Волгоград" && cbcity.Text != "Коломна" && cbcity.Text != "Москва" && cbcity.Text != "Нижний Новгород" && cbcity.Text != "Егорьевск"
-            //    && cbcity.Text != "Рязань") errors.AppendLine("Выберите фабрику");
-            //if (cbfabrica.Text != "Плюшевая фабрика" && cbfabrica.Text != "Бумажный Человек" && cbfabrica.Text != "Кукольный завод" && cbfabrica.Text != "ПластиДом"
-            //    && cbfabrica.Text != "СлаймТаун" && cbfabrica.Text != "Воздух" && cbfabrica.Text != "Лего") errors.AppendLine("Выберите город");
+            StringBuilder errors = new StringBuilder();
+            if (tbcode.Text.Length < 4 || tbcode.Text.Length > 5|| Int32.TryParse(tbcode.Text, out int a) == false) errors.AppendLine("Введите код (длина кода 4)");
+            if (tbname.Text.Length == 0) errors.AppendLine("Введите имя");
+            if (tbphone.Text.Length != 11)  errors.AppendLine("Введите корректный номер телефона (его длина 11)");
+            if (BigInteger.TryParse(tbphone.Text, out BigInteger b) == false) errors.AppendLine("Введите корректный номер телефона (не пишите + или - в начале)");
+            if (tbadress.Text.Length == 0) errors.AppendLine("Выберите адрес");
+            if (cbcity.Text != "Орск" && cbcity.Text != "Коломна" && cbcity.Text != "Москва" && cbcity.Text != "Нижний Новгород" && cbcity.Text != "Грозный"
+                && cbcity.Text != "Рязань" && cbcity.Text != "Зарайск") errors.AppendLine("Выберите город");
 
-            //if (errors.Length > 0)
-            //{
-            //    MessageBox.Show(errors.ToString());
-            //    return;
-            //}
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
             //try
             //{
-            //    if (Data.zakazy == null)
-            //    {
-            //        _db.Zakazies.Add(_zakazy);
-            //        _db.SaveChanges();
-            //    }
-            //    else
-            //    {
-            //        _db.SaveChanges();
-            //    }
-            //    MessageBox.Show("Информация сохранена");
-            //    this.Close();
+                if (Data.client == null)
+                {
+                    _db.Clients.Add(_client);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    _db.SaveChanges();
+                }
+                MessageBox.Show("Информация сохранена");
+                this.Close();
             //}
             //catch (Exception ex)
             //{
@@ -71,17 +71,15 @@ namespace pr20
 
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
-            if (Data.zakazy == null)
+            if (Data.client == null)
             {
-                WindowAddEdit.Title = "Добавление записи";
-                btnadded.Content = "Добавить";
-                _zakazy = new Zakazy();
+                _client = new Client();
             }
             else
             {
-                _zakazy = _db.Zakazies.Find(Data.zakazy.NumZak);
+                _client = _db.Clients.Find(Data.client.CodeClient);
             }
-            WindowAddEdit.DataContext = _zakazy;
+            WindowAddEdit.DataContext = _client;
         }
     }
 }

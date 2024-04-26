@@ -5,14 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pr20"
         mc:Ignorable="d"
-        Title="spravtovar" Loaded="WindowLoaded" Height="450" Width="300">
+        Title="spravtovar" Loaded="WindowLoaded" Height="450" Width="300" ResizeMode="NoResize" Icon="/Yoda_1.ico">
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListTovar" HorizontalAlignment="Center" Height="434" Grid.Row="0"  ItemsSource="{Binding CodeObjNavigation.CodeObj}" VerticalAlignment="Center" Width="300"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Grid.Row="1" Height="45" VerticalAlignment="Center" Width="100"/>
-        <Button Content="Удалить" HorizontalAlignment="Right" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="100"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Grid.Row="1" Height="45" VerticalAlignment="Center" Width="100" Click="addclick"/>
+        <Button Content="Удалить" HorizontalAlignment="Right" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="100" Click="delClick"/>
+        <DataGrid AutoGenerateColumns="False" x:Name="gridtovar" HorizontalAlignment="Center" Height="352" VerticalAlignment="Center" Width="295" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Код товара">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding CodeObj}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Название" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Цена" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Price}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

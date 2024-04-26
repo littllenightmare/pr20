@@ -19,6 +19,10 @@ public partial class Pr20Context : DbContext
 
     public virtual DbSet<Client> Clients { get; set; }
 
+    public virtual DbSet<Kakoe> Kakoes { get; set; }
+
+    public virtual DbSet<Nikakoe> Nikakoes { get; set; }
+
     public virtual DbSet<Zakazy> Zakazies { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -43,6 +47,25 @@ public partial class Pr20Context : DbContext
             entity.HasKey(e => e.CodeClient).HasName("PK_Клиенты");
 
             entity.Property(e => e.CodeClient).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<Kakoe>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("kakoe");
+
+            entity.Property(e => e.Month).HasColumnName("MONTH");
+            entity.Property(e => e.Name).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<Nikakoe>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("nikakoe");
+
+            entity.Property(e => e.Summa).HasColumnType("money");
         });
 
         modelBuilder.Entity<Zakazy>(entity =>

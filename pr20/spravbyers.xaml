@@ -5,14 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pr20"
         mc:Ignorable="d"
-        Title="spravbyers" Height="450" Loaded="WindowLoaded" Width="300">
+        Title="spravbyers" Height="450" Loaded="WindowLoaded" Width="600" ResizeMode="NoResize" Icon="/Network Neighborhood.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListByer" HorizontalAlignment="Center" Height="353" VerticalAlignment="Top" Width="300"/>
-        <Button Content="Добавить" HorizontalAlignment="Left" Grid.Row="1" Height="45" VerticalAlignment="Center" Width="100"/>
-        <Button Content="Удалить" HorizontalAlignment="Right" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="100"/>
+        <Button Content="Добавить" HorizontalAlignment="Left" Grid.Row="1" Height="45" VerticalAlignment="Center" Width="100" Click="addclick"/>
+        <Button Content="Удалить" HorizontalAlignment="Right" Height="45" Grid.Row="1" VerticalAlignment="Center" Width="100" Click="delClick"/>
+        <DataGrid AutoGenerateColumns="False" x:Name="databyer" HorizontalAlignment="Center" Height="352" VerticalAlignment="Top" Width="565">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Код клиента">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding CodeClient}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="ФИО" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Город" Width="130">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding City}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Адрес" Width="130">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Address}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Телефон" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Phone}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

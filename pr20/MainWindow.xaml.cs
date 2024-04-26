@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography.Pkcs;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -60,54 +61,26 @@ namespace pr20
         {
             if (findtb.Text.IsNullOrEmpty() == false)
             {
-                if (rb1.IsChecked == true)
-                {
-                    MessageBox.Show("Будут найдены записи из таблицы клиенты");
-                    List<Client> listItem = (List<Client>)dg.ItemsSource;
-                    var finded = (listItem.Where(p => p.Name.Contains(findtb.Text) ||
-                        p.City.Contains(findtb.Text) ||
-                        p.Address.Contains(findtb.Text) ||
+                List<Zakazy> listItem2 = (List<Zakazy>)dg.ItemsSource;
+                var finded2 = (listItem2.Where(p => p.NumZak.ToString().Contains(findtb.Text) ||
+                    p.DateZak.ToString().Contains(findtb.Text) ||
                     p.CodeClient.ToString().Contains(findtb.Text) ||
-                    p.Phone.ToString().Contains(findtb.Text)));
-                    if (finded.Count() > 0)
-                    {
-                        Client item = finded.First();
-                        dg.SelectedItem = item;
-                        dg.ScrollIntoView(item);
-                        dg.Focus();
-                    }
-                }
-                else if (rb2.IsChecked == true)
+                p.CodeObj.ToString().Contains(findtb.Text) ||
+                p.CodeClientNavigation.CodeClient.ToString().Contains(findtb.Text) ||
+                p.CodeClientNavigation.Name.ToString().Contains(findtb.Text) ||
+                p.CodeClientNavigation.City.ToString().Contains(findtb.Text) ||
+                p.CodeClientNavigation.Address.ToString().Contains(findtb.Text) ||
+                p.CodeClientNavigation.Phone.ToString().Contains(findtb.Text) ||
+                p.CodeObjNavigation.CodeObj.ToString().Contains(findtb.Text) ||
+                p.CodeObjNavigation.Name.ToString().Contains(findtb.Text) ||
+                p.CodeObjNavigation.Price.ToString().Contains(findtb.Text) ||
+                p.Amount.ToString().Contains(findtb.Text)));
+                if (finded2.Count() > 0)
                 {
-                    MessageBox.Show("Будут найдены записи из таблицы заказы");
-                    List<Zakazy> listItem = (List<Zakazy>)dg.ItemsSource;
-                    var finded = (listItem.Where(p => p.NumZak.ToString().Contains(findtb.Text) ||
-                        p.DateZak.ToString().Contains(findtb.Text) ||
-                        p.CodeClient.ToString().Contains(findtb.Text) ||
-                    p.CodeObj.ToString().Contains(findtb.Text) ||
-                    p.Amount.ToString().Contains(findtb.Text)));
-                    if (finded.Count() > 0)
-                    {
-                        Zakazy item = finded.First();
-                        dg.SelectedItem = item;
-                        dg.ScrollIntoView(item);
-                        dg.Focus();
-                    }
-                }
-                if (rb1.IsChecked == true)
-                {
-                    MessageBox.Show("Будут найдены записи из таблицы каталог");
-                    List<Catalog> listItem = (List<Catalog>)dg.ItemsSource;
-                    var finded = (listItem.Where(p => p.Name.Contains(findtb.Text) ||
-                        p.CodeObj.ToString().Contains(findtb.Text) ||
-                        p.Price.ToString().Contains(findtb.Text)));
-                    if (finded.Count() > 0)
-                    {
-                        Catalog item = finded.First();
-                        dg.SelectedItem = item;
-                        dg.ScrollIntoView(item);
-                        dg.Focus();
-                    }
+                    Zakazy item = finded2.First();
+                    dg.SelectedItem = item;
+                    dg.ScrollIntoView(item);
+                    dg.Focus();
                 }
             }
         }
@@ -128,6 +101,13 @@ namespace pr20
             f.Owner = this;
             f.ShowDialog();
             LoadDBInDataGrid();
+        }
+
+        private void zaprosiClick(object sender, RoutedEventArgs e)
+        {
+            zapros f = new zapros();
+            f.Owner = this;
+            f.ShowDialog();
         }
     }
 }
